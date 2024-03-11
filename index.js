@@ -15,66 +15,73 @@ function initInstructions() {
 async function initList() {
   const choice = readlineSync.question('Enter input: ');
 
-  switch (choice) {
-    case '1':
-    case 'save':
-      const titleToSave = readlineSync.question('Enter issue title: ');
-      const descriptionToSave = readlineSync.question('Enter issue description: ');
-      const savedIssue = await api.createIssue(titleToSave, descriptionToSave);
-  
-      console.info('Issue added successfully.');
-      console.info(savedIssue);
-      break;
-    
-    case '2':
-    case 'read all':
-      const issues = await api.getIssues();
-      issues.forEach((issue, idx) => console.log(`no. ${idx + 1}`, issue));
-      break;
+  try {
+    switch (choice) {
+      case '1':
+      case 'save':
+        const titleToSave = readlineSync.question('Enter issue title: ');
+        const descriptionToSave = readlineSync.question('Enter issue description: ');
+        const savedIssue = await api.createIssue(titleToSave, descriptionToSave);
 
-    case '3':
-    case 'read':
-      const idToRead = readlineSync.question('Enter issue ID to read:  ');;
-      const fetchedIssue = await api.getIssueById(idToRead);
-      console.info(fetchedIssue);
-      break;
+        console.info('Issue added successfully.');
+        console.info(savedIssue);
+        break;
 
-    case '4':
-    case 'update':
-      const idToUpdate = readlineSync.question('Enter issue ID to update:  ');
-      const issueToUpdate = await api.getIssueById(idToUpdate);
-      console.info(issueToUpdate);
-      const titleToUpdate = readlineSync.question('Enter issue title (press enter to skip):  ');
-      const descriptionToUpdate = readlineSync.question('Enter issue (press enter to skip):  ');
-      const updatedIssue = await api.updateIssue(idToUpdate, titleToUpdate, descriptionToUpdate);
+      case '2':
+      case 'read all':
+        const issues = await api.getIssues();
+        issues.forEach((issue, idx) => console.log(`no. ${idx + 1}`, issue));
+        break;
 
-      console.info(`Issue ${idToUpdate} updated successfully.`);
-      console.info(updatedIssue);
-      break;
+      case '3':
+      case 'read':
+        const idToRead = readlineSync.question('Enter issue ID to read:  ');;
+        const fetchedIssue = await api.getIssueById(idToRead);
+        console.info(fetchedIssue);
+        break;
 
-    case '5':
-    case 'delete':
-      const idToDelete = readlineSync.question('Enter issue ID to delete:  ');
-      await api.deleteIssue(idToDelete);
+      case '4':
+      case 'update':
+        const idToUpdate = readlineSync.question('Enter issue ID to update:  ');
+        const issueToUpdate = await api.getIssueById(idToUpdate);
+        console.info(issueToUpdate);
+        const titleToUpdate = readlineSync.question('Enter issue title (press enter to skip):  ');
+        const descriptionToUpdate = readlineSync.question('Enter issue (press enter to skip):  ');
+        const updatedIssue = await api.updateIssue(idToUpdate, titleToUpdate, descriptionToUpdate);
 
-      console.info(`Issue ${idToDelete} deleted successfully.`);
-      break;
-    
-    case '--help':
-      initInstructions();
-      break;
+        console.info(`Issue ${idToUpdate} updated successfully.`);
+        console.info(updatedIssue);
+        break;
 
-    case '--exit':
-      console.info('Exiting the app.');
-      process.exit();
+      case '5':
+      case 'delete':
+        const idToDelete = readlineSync.question('Enter issue ID to delete:  ');
+        await api.deleteIssue(idToDelete);
 
-    default:
-      console.info('Input invalid. Input --help to see available options');
+        console.info(`Issue ${idToDelete} deleted successfully.`);
+        break;
+      
+      case '--help':
+        initInstructions();
+        break;
+
+      case '--exit':
+      case 'clear':
+        console.info('Exiting the app.');
+        process.exit();
+
+      default:
+        console.info('Input invalid. Input --help to see available options');
+    }
+  } catch (e) {
+    console.error(e);
   }
 
-  initInstructions();
   initList();
 }
+
+
+
 
 
 // Start the app
