@@ -24,7 +24,7 @@ const createIssue = async (title, description) => {
 
     return issue.json();
   } catch (e) {
-    throw e?.message;
+    throw e;
   }
 }
 
@@ -37,7 +37,7 @@ const getIssues = async () => {
     const issues = await fetch(issueUrl, options);
     return issues.json();
   } catch (e) {
-    throw e?.message;
+    throw e;
   }
 }
 
@@ -50,7 +50,7 @@ const getIssueById = async (id) => {
     const issue = await fetch(`${issueUrl}/${id}`, options);
     return issue.json();
   } catch (e) {
-    throw e?.message;
+    throw e;
   }
 }
 
@@ -69,7 +69,7 @@ const updateIssue = async (id, title, description) => {
     const issue = await fetch(`${issueUrl}/${id}`, options);
     return issue.json();
   } catch (e) {
-    throw e?.message;
+    throw e;
   }
 }
 
@@ -80,10 +80,10 @@ const deleteIssue = async (id) => {
       method: 'DELETE',
     };
 
-    await fetch(`${issueUrl}/${id}`, options);
-    return;
+    const issue = await fetch(`${issueUrl}/${id}`, options);
+    return issue.json();
   } catch (e) {
-    throw e?.message;
+    throw e;
   }
 }
 
