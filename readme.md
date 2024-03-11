@@ -1,5 +1,7 @@
 # SITEMATE CHALLENGE CLI
 
+![CLI view](https://imgur.com/a/ItP3qMB)
+
 ## requirements
 
 - node v20.3.0
