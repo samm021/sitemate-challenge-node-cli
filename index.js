@@ -3,6 +3,7 @@ const api = require('./api');
 require('dotenv').config();
 
 function initInstructions() {
+  console.log('\n');
   console.info('save / 1        : create/save issue');
   console.info('read all / 2    : read all saved issues');
   console.info('read / 3        : read issue (by issue id)');
@@ -23,6 +24,7 @@ async function initList() {
         const descriptionToSave = readlineSync.question('Enter issue description: ');
         const savedIssue = await api.createIssue(titleToSave, descriptionToSave);
 
+        console.log('\n');
         console.info('Issue added successfully.');
         console.info(savedIssue);
         break;
@@ -37,6 +39,7 @@ async function initList() {
       case 'read':
         const idToRead = readlineSync.question('Enter issue ID to read:  ');;
         const fetchedIssue = await api.getIssueById(idToRead);
+        console.log('\n');
         console.info(fetchedIssue);
         break;
 
@@ -49,6 +52,7 @@ async function initList() {
         const descriptionToUpdate = readlineSync.question('Enter issue (press enter to skip):  ');
         const updatedIssue = await api.updateIssue(idToUpdate, titleToUpdate, descriptionToUpdate);
 
+        console.log('\n');
         console.info(`Issue ${idToUpdate} updated successfully.`);
         console.info(updatedIssue);
         break;
@@ -58,6 +62,7 @@ async function initList() {
         const idToDelete = readlineSync.question('Enter issue ID to delete:  ');
         await api.deleteIssue(idToDelete);
 
+        console.log('\n');
         console.info(`Issue ${idToDelete} deleted successfully.`);
         break;
       
@@ -67,6 +72,7 @@ async function initList() {
 
       case '--exit':
       case 'clear':
+        console.log('\n');
         console.info('Exiting the app.');
         process.exit();
 
@@ -77,6 +83,7 @@ async function initList() {
     console.error(e);
   }
 
+  if (choice != '--help') initInstructions();
   initList();
 }
 
