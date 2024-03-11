@@ -8,6 +8,7 @@
 ## dependencies
 
 - readline-sync
+- dotenv
 
 ## to start
 

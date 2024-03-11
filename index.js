@@ -1,5 +1,6 @@
 const readlineSync = require('readline-sync');
 const api = require('./api');
+require('dotenv').config();
 
 function initInstructions() {
   console.info('save / 1        : create/save issue');
