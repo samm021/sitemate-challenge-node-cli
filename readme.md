@@ -1,6 +1,6 @@
 # SITEMATE CHALLENGE CLI
 
-![CLI view](https://imgur.com/a/ItP3qMB)
+![CLI view](https://github.com/samm021/sitemate-challenge-node-cli/assets/73097523/54da37ab-93b7-4a13-8375-31dae60708b2)
 
 ## requirements
 
